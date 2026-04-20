@@ -1,0 +1,42 @@
+{
+  "sanjeev28052004@gmail.com": {
+    "ownerEmail": "sanjeev28052004@gmail.com",
+    "gmailEmail": "sanjeev28052004@gmail.com",
+    "tokens": {
+      "access_token": "ya29.a0Aa7MYiq8tBzO0NYX_HzDx9MHMHmks--5rTnoaZHKuPf0D24qV5-jvGXG0r94pHeohggG84aij3oqYA6nGxXK9pWUWoiwBbETVN21EkR_GkHYO3-N_ozCXO7zg5PE6Yqgy4qO57F4tP1yCG-DVM4RMXcJlguE30kp0x-6DWwRRZyDoOHMz3EBffj0VVEpAxuxtGcsnFAdaCgYKAW4SARESFQHGX2MiVITU-h8L7TdgXvnQX1VJzw0207",
+      "scope": "https://www.googleapis.com/auth/gmail.readonly openid https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/userinfo.email",
+      "token_type": "Bearer",
+      "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjY0NzAxNGY5YTRhNGNiYmI2ZTlhYTFmOWUzMGVlNmNjNzBkYTc0MmEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI1MTk3ODYyMjczOTMtMGFjOTB2YWY3cTJlZWU0ZTBiamdkNmt2b2V2Nm1hMm8uYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI1MTk3ODYyMjczOTMtMGFjOTB2YWY3cTJlZWU0ZTBiamdkNmt2b2V2Nm1hMm8uYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDQzNjUwMjE5ODI2MDk2MDU2OTQiLCJlbWFpbCI6InNhbmplZXYyODA1MjAwNEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6InVNRkpaWFhlT0NDQ0V6LXlJOERxd3ciLCJpYXQiOjE3NzY2NzMzNDksImV4cCI6MTc3NjY3Njk0OX0.YFesjz250zIqyGt_dbcutcHwV7I6B3Ss13esd6I0-PvQW9nplEpwmZN8IXwc75Za7NarAT9YMFxGIZ0ZFcCppC8OqzslaFUYEd5pVmcA07cYcELPSoktrDQpEfI5XHoF29c38oaZ4UvlhRyRFtqe0rni5ctEKrzRmnYHclhEsq9JVZuzxVyKsyZOKfUwjP2nTRbHlaaCIHKqP8PpzmebQQ7g8Oz7E5Zq7ZnyRGwZv0S3kBWcO2iYbKbxemuoofAv38-NjB6zzVfaUeB9-iQ15Zih5fLn-hql69jiaz0w_4yCvD_QBEpb_UKoFUDCrg27D5VETQHGw4vwHTyBt3WTIg",
+      "refresh_token_expires_in": 476308,
+      "expiry_date": 1776676948188,
+      "refresh_token": "1//0gDQoXGIFya63CgYIARAAGBASNwF-L9Ir8fv-0LvbSTB9qKmd-NVdeYuJ8PPI7-kezyvMH4rzw3nqmdZmiThMPwJxtcv4B8r0ySU"
+    },
+    "updatedAt": "2026-04-20T08:22:34.089Z"
+  },
+  "sanjeev.kumar@flame.edu.in": {
+    "ownerEmail": "sanjeev.kumar@flame.edu.in",
+    "gmailEmail": "sanjeev.kumar@flame.edu.in",
+    "tokens": {
+      "access_token": "ya29.a0Aa7MYipSknQe_8cfN9gUzhgwrCl33djRwevbFBJf2ZGfnPCnJmkkFXzEprkkdgNOHumh9sv4LikOWKOR9DfGxsryF-d8cZqxWPNmRr_vjMrYkAhL83O8vE1rXM6L7e7mThtW7x9nOm9KsoNlkOeQP-nHwyPtTyn-I79pSA7Yqs68CDcScgHf3kX8Z64KF9mldXWg2bU-aCgYKASESARESFQHGX2MikWX6OaURBb99hJyWsEfduQ0207",
+      "scope": "https://www.googleapis.com/auth/gmail.readonly openid https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/userinfo.email",
+      "token_type": "Bearer",
+      "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjY0NzAxNGY5YTRhNGNiYmI2ZTlhYTFmOWUzMGVlNmNjNzBkYTc0MmEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI1MTk3ODYyMjczOTMtMGFjOTB2YWY3cTJlZWU0ZTBiamdkNmt2b2V2Nm1hMm8uYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI1MTk3ODYyMjczOTMtMGFjOTB2YWY3cTJlZWU0ZTBiamdkNmt2b2V2Nm1hMm8uYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTc3Nzk3ODU2NDI3MDc2NzI4MTEiLCJoZCI6ImZsYW1lLmVkdS5pbiIsImVtYWlsIjoic2FuamVldi5rdW1hckBmbGFtZS5lZHUuaW4iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6IjExUVRlc2VYUGNZVnJKR1l0TWtGSUEiLCJpYXQiOjE3NzY3MDQ0NzAsImV4cCI6MTc3NjcwODA3MH0.VWDMje3KUsLFdJ9tHzFiZbaRvqYwPSosY1oDFRhSQKFj8kpDt9tX35aeemk6seTla9lnV5dSI_qn6LjdvVzqnRifKH9k0LbIROYVw7rvVHmWIQUEhGbzAzHcl_zHOQdr64u0MHgWfbv8KaBc8bLDDo56lqXtnoIaoJmhqbw1X8PGScmVbYgRH2JgSK-bFi_8GeUV5cccIltnV5_BsGMMKd6DyslhMjc9JdpdRSYPbChZ5dVCRX9fV5FbUfZgHp-vnIMrzOH_iC1mRtcg-A-hG9sjWMAyzvnStI-87y1qoyWesdMmQ1uORLExzteopZqP330qjOn0yT7xE9_mdrGpuw",
+      "expiry_date": 1776708068650,
+      "refresh_token": "1//0gkUBrXBAsl4fCgYIARAAGBASNwF-L9Ir-ybeLj3W8VnQRr-6foA5Sd-HhPzPQL_NXKEtgEldge6027nGieTUoenn4EJZplbCCHU"
+    },
+    "updatedAt": "2026-04-20T17:01:15.254Z"
+  },
+  "ram.varan@flame.edu.in": {
+    "ownerEmail": "ram.varan@flame.edu.in",
+    "gmailEmail": "ram.varan@flame.edu.in",
+    "tokens": {
+      "access_token": "ya29.a0Aa7MYipu_-3H5GpO95_9XGGGt6EURXZ6xltLkJ9VdyuwLhlGex9_iQQzRLI_Ug-DbUyvVEL22DUAnJzoHks0O3ajkluhOUYjjOdXLhSgIV4XmWsBgxIo9pMlHr7n2mgDVPtXaC3jGako7JAJE-w7apnOJWXMTyVT9TaOa7NgO9s7x5aRjPYD1xzvsv6HM3kjMNjBgp8aCgYKAZgSARASFQHGX2MiQzDWu0vhA7Vy96rqOgrvgQ0206",
+      "refresh_token": "1//0gpuHfSg0WAxkCgYIARAAGBASNwF-L9IrBKdphwSf_2g0n4RLNGpT7IKsW5kzsazBk0V6dxKFQ050IHLnY4kpixJ0k83SPa_mhbk",
+      "scope": "https://www.googleapis.com/auth/gmail.readonly openid https://www.googleapis.com/auth/gmail.modify https://www.googleapis.com/auth/gmail.send https://www.googleapis.com/auth/userinfo.email",
+      "token_type": "Bearer",
+      "id_token": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjY0NzAxNGY5YTRhNGNiYmI2ZTlhYTFmOWUzMGVlNmNjNzBkYTc0MmEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI1MTk3ODYyMjczOTMtMGFjOTB2YWY3cTJlZWU0ZTBiamdkNmt2b2V2Nm1hMm8uYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI1MTk3ODYyMjczOTMtMGFjOTB2YWY3cTJlZWU0ZTBiamdkNmt2b2V2Nm1hMm8uYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMTU5NDM0MjU3ODE2Mzc2MzI3MDgiLCJoZCI6ImZsYW1lLmVkdS5pbiIsImVtYWlsIjoicmFtLnZhcmFuQGZsYW1lLmVkdS5pbiIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoiQ2V1aExTclBqcjdEYzJJcUMwak5SQSIsImlhdCI6MTc3NjY2ODI3OCwiZXhwIjoxNzc2NjcxODc4fQ.byfxzEYujrisJU5t484--EHtHuYrZxD7QnbBmfqbuiokkXk9umDd9W4yR9jIHKgmiayBs3zY2s5b0Ykuu5IbyjrIMZNxv6NklQGHxv9eRCIpNsa4-Q3EPy3hBxzD9wDNHsof9kYiVHNLgYLzP9YAMKlgozQfZR0V-gUYFeUREwAW_lpAyxic-dYagujZ_r6q6d4h4POnPQkNXKHA4RCibxt5Dn8IH5rCAfCo5YP8DkWPig6tNeddgX2vu_nTMmb_t5Sg54kTUTJ2l5bpidARHaxhGMs_F1tXjr5YvlYPEp9GgfvF5uhiEjBRTZXS9-dEZCn2JklyHKPmI64gFwS3vg",
+      "expiry_date": 1776671877712
+    },
+    "updatedAt": "2026-04-20T06:57:59.079Z"
+  }
+}

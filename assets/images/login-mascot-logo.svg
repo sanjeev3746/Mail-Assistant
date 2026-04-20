@@ -1,0 +1,52 @@
+<svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mail assistant mascot">
+  <defs>
+    <linearGradient id="swirlBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b4f83" />
+      <stop offset="55%" stop-color="#2aa6e6" />
+      <stop offset="100%" stop-color="#68d0ff" />
+    </linearGradient>
+    <linearGradient id="envelopeBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7fbff" />
+      <stop offset="100%" stop-color="#d7ecfb" />
+    </linearGradient>
+    <linearGradient id="accentGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe65c" />
+      <stop offset="100%" stop-color="#f6b21f" />
+    </linearGradient>
+  </defs>
+
+  <path
+    d="M73 178C112 211 187 216 264 189c36-13 63-35 76-57-20 45-66 79-115 93-89 26-181 11-216-31-14-17-13-36 2-51 12-12 28-18 50-25-7 11-9 22-3 34z"
+    fill="url(#swirlBlue)"
+    opacity="0.95"
+  />
+  <path
+    d="M78 177c36 27 98 28 163 9 47-14 88-40 112-74-18 37-55 69-104 84-76 24-155 15-192-17-12-11-14-24-8-36 8 12 19 22 29 34z"
+    fill="#2a8ed3"
+    opacity="0.35"
+  />
+
+  <g transform="translate(85 42) rotate(6 95 74)">
+    <rect x="34" y="39" width="154" height="110" rx="16" fill="url(#envelopeBlue)" stroke="#0c3f7a" stroke-width="8" />
+    <path d="M46 53l72 50 72-50" fill="none" stroke="#c5e2f4" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M46 53l72 56 72-56" fill="none" stroke="#f5faff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" />
+    <circle cx="80" cy="103" r="8" fill="#13386f" />
+    <circle cx="132" cy="103" r="8" fill="#13386f" />
+    <path d="M94 121c14 12 30 12 44 0" fill="none" stroke="#0f2d5c" stroke-width="7" stroke-linecap="round" />
+    <ellipse cx="69" cy="111" rx="10" ry="6" fill="#ffd9de" opacity="0.75" />
+    <ellipse cx="149" cy="111" rx="10" ry="6" fill="#ffd9de" opacity="0.75" />
+
+    <path d="M46 88c-14-3-27-15-27-30 0-17 15-31 32-31 18 0 33 14 33 31 0 12-7 22-18 28" fill="#1b87d6" stroke="#0c3f7a" stroke-width="6" />
+    <path d="M195 88c14-3 27-15 27-30 0-17-15-31-32-31-18 0-33 14-33 31 0 12 7 22 18 28" fill="#1b87d6" stroke="#0c3f7a" stroke-width="6" />
+    <path d="M77 28c16-24 67-38 111-23 24 8 45 23 53 42" fill="none" stroke="#0c3f7a" stroke-width="10" stroke-linecap="round" />
+    <path d="M79 29c16-21 64-34 104-21 23 7 41 20 48 36" fill="none" stroke="#2ab1ef" stroke-width="6" stroke-linecap="round" />
+
+    <path d="M180 145l24 6c5 1 8 7 6 12l-2 6c-2 5-8 8-13 6l-23-7c-5-2-7-8-5-13l2-4c2-5 7-8 11-6z" fill="#1b87d6" stroke="#0c3f7a" stroke-width="5" />
+    <path d="M199 150c19-7 31-18 43-34" fill="none" stroke="#0c3f7a" stroke-width="7" stroke-linecap="round" />
+    <path d="M238 115c14 2 28 0 37-5" fill="none" stroke="#0c3f7a" stroke-width="7" stroke-linecap="round" />
+
+    <circle cx="29" cy="41" r="18" fill="url(#accentGold)" opacity="0.95" />
+    <path d="M29 19l4 14 14 4-14 4-4 14-4-14-14-4 14-4z" fill="url(#accentGold)" />
+    <circle cx="262" cy="82" r="8" fill="#69c9ff" opacity="0.95" />
+  </g>
+</svg>
