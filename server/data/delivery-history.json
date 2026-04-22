@@ -2,6 +2,19 @@
   {
     "ticketKey": "sanjeev.kumar@flame.edu.in::1",
     "ownerEmail": "sanjeev.kumar@flame.edu.in",
+    "recipientEmail": "sanjeev.kumar@flame.edu.in",
+    "subject": "Re: General",
+    "body": "Dear Prof. Abhineety Goel, \n\nThank you for reaching out to us with the announcement of the informational session with ASSIST(ASIA). We appreciate the effort you are putting into providing opportunities for FLAME students. \n\nWe wish you all the best for the session and hope it is a success. \n\nBest regards,\nCustomer Support Team",
+    "gmailMessageId": "19db508d899f9491",
+    "scheduledAtMs": 1776858747927,
+    "deliverySource": "manual",
+    "status": "sent",
+    "details": "",
+    "eventTimeMs": 1776858747927
+  },
+  {
+    "ticketKey": "sanjeev.kumar@flame.edu.in::1",
+    "ownerEmail": "sanjeev.kumar@flame.edu.in",
     "recipientEmail": "ram.varan@flame.edu.in",
     "subject": "Re: General",
     "body": "Dear Students, Thank you for your email. We hope this message finds you well. If you have any questions or concerns regarding the final submission deadline, please do not hesitate to reach out to us. We are here to help. \n\nBest regards, \nCustomer Support Team",
@@ -275,16 +288,6 @@
     "status": "sent",
     "details": "",
     "eventTimeMs": 1776444567161
-  },
-  {
-    "ticketKey": "sanjeev.kumar@flame.edu.in::1",
-    "ownerEmail": "sanjeev.kumar@flame.edu.in",
-    "recipientEmail": "sanjeev.kumar@flame.edu.in",
-    "subject": "Re: General",
-    "scheduledAtMs": 1776444104113,
-    "status": "sent",
-    "details": "",
-    "eventTimeMs": 1776444104114
   },
   {
     "ticketKey": "sanjeev.kumar@flame.edu.in::1",

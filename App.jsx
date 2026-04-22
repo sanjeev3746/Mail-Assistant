@@ -14,6 +14,7 @@ import appLogo from "./assets/images/logo.png";
 const ANALYSIS_CACHE_STORAGE_KEY = "customer-response-copilot.analysis-cache.v1";
 const AUTH_USERS_STORAGE_KEY = "customer-response-copilot.auth-users.v1";
 const API_KEY_STORAGE_PREFIX = "customer-response-copilot.groq-api-key.v1";
+const API_BASE_URL = String(import.meta.env.VITE_API_BASE_URL || "").replace(/\/+$/, "");
 const FIREBASE_CONFIG = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY || "",
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN || "",
@@ -146,6 +147,15 @@ function clearSavedApiKey(email) {
   } catch {
     // Ignore storage quota and privacy mode failures.
   }
+}
+
+function apiUrl(pathname) {
+  const safePath = String(pathname || "");
+  if (!safePath.startsWith("/")) {
+    throw new Error("API path must start with '/'.");
+  }
+
+  return `${API_BASE_URL}${safePath}`;
 }
 
 // ─── DESIGN TOKENS ───────────────────────────────────────────────────────────
@@ -1425,7 +1435,7 @@ function buildScheduledTimestamp(dateInput, hourInput, minuteInput, periodInput)
 
 async function fetchScheduledJob(ticketKey, ownerEmail) {
   const query = new URLSearchParams({ ticketKey, ownerEmail: ownerEmail || "" });
-  const response = await fetch(`/api/scheduled-emails?${query.toString()}`);
+  const response = await fetch(apiUrl(`/api/scheduled-emails?${query.toString()}`));
   if (!response.ok) {
     throw new Error("Unable to fetch scheduled email status.");
   }
@@ -1435,7 +1445,7 @@ async function fetchScheduledJob(ticketKey, ownerEmail) {
 }
 
 async function createScheduledJob({ ticketKey, ownerEmail, recipientEmail, subject, body, scheduledAtMs }) {
-  const response = await fetch("/api/scheduled-emails", {
+  const response = await fetch(apiUrl("/api/scheduled-emails"), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -1460,7 +1470,7 @@ async function createScheduledJob({ ticketKey, ownerEmail, recipientEmail, subje
 
 async function cancelScheduledJob(ticketKey, ownerEmail) {
   const query = new URLSearchParams({ ownerEmail: ownerEmail || "" });
-  const response = await fetch(`/api/scheduled-emails/${encodeURIComponent(ticketKey)}?${query.toString()}`, {
+  const response = await fetch(apiUrl(`/api/scheduled-emails/${encodeURIComponent(ticketKey)}?${query.toString()}`), {
     method: "DELETE",
   });
 
@@ -1471,7 +1481,7 @@ async function cancelScheduledJob(ticketKey, ownerEmail) {
 }
 
 async function sendEmailNow({ ticketKey, ownerEmail, recipientEmail, subject, body }) {
-  const response = await fetch("/api/send-email", {
+  const response = await fetch(apiUrl("/api/send-email"), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -1498,7 +1508,7 @@ async function fetchDeliveryStatus(ownerEmail, limit = 30) {
     ownerEmail: ownerEmail || "",
     limit: String(limit),
   });
-  const response = await fetch(`/api/scheduled-emails/history?${query.toString()}`);
+  const response = await fetch(apiUrl(`/api/scheduled-emails/history?${query.toString()}`));
   const payload = await response.json().catch(() => ({}));
 
   if (!response.ok) {
@@ -1528,7 +1538,7 @@ async function deleteDeliveryHistoryEvent({ ticketKey, eventTimeMs, ownerEmail }
   });
 
   const response = await fetch(
-    `/api/scheduled-emails/history/${encodeURIComponent(ticketKey)}?${query.toString()}`,
+    apiUrl(`/api/scheduled-emails/history/${encodeURIComponent(ticketKey)}?${query.toString()}`),
     {
       method: "DELETE",
     }
@@ -1550,7 +1560,7 @@ async function fetchSentEmailContent({ ownerEmail, ticketKey, gmailMessageId, re
     eventTimeMs: String(eventTimeMs || ""),
   });
 
-  const response = await fetch(`/api/gmail/sent-message?${query.toString()}`);
+  const response = await fetch(apiUrl(`/api/gmail/sent-message?${query.toString()}`));
   const payload = await response.json().catch(() => ({}));
   if (!response.ok) {
     throw new Error(payload.details || payload.error || "Unable to fetch sent email content.");
@@ -1560,7 +1570,7 @@ async function fetchSentEmailContent({ ownerEmail, ticketKey, gmailMessageId, re
 }
 
 async function fetchGmailMessages({ maxCount, unseenOnly, ownerEmail, gmailEmail, pageToken }) {
-  const response = await fetch("/api/gmail/fetch", {
+  const response = await fetch(apiUrl("/api/gmail/fetch"), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -1586,7 +1596,7 @@ async function fetchGmailMessages({ maxCount, unseenOnly, ownerEmail, gmailEmail
 }
 
 async function trashGmailMessages({ ownerEmail, gmailEmail, messageIds }) {
-  const response = await fetch("/api/gmail/trash", {
+  const response = await fetch(apiUrl("/api/gmail/trash"), {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -1608,7 +1618,7 @@ async function trashGmailMessages({ ownerEmail, gmailEmail, messageIds }) {
 
 async function getGmailOAuthStatus(ownerEmail) {
   const query = new URLSearchParams({ ownerEmail: ownerEmail || "" });
-  const response = await fetch(`/api/gmail/oauth/status?${query.toString()}`);
+  const response = await fetch(apiUrl(`/api/gmail/oauth/status?${query.toString()}`));
   const payload = await response.json().catch(() => ({}));
   if (!response.ok) {
     throw new Error(payload.error || "Unable to fetch Gmail OAuth status.");
@@ -1621,7 +1631,7 @@ async function startGmailOAuth(ownerEmail, gmailEmail) {
     ownerEmail: ownerEmail || "",
     gmailEmail: gmailEmail || "",
   });
-  const response = await fetch(`/api/gmail/oauth/start?${query.toString()}`);
+  const response = await fetch(apiUrl(`/api/gmail/oauth/start?${query.toString()}`));
   const payload = await response.json().catch(() => ({}));
   if (!response.ok) {
     throw new Error(payload.error || "Unable to start Gmail OAuth.");
@@ -1634,7 +1644,7 @@ async function startGmailOAuth(ownerEmail, gmailEmail) {
 
 async function disconnectGmailOAuth(ownerEmail) {
   const query = new URLSearchParams({ ownerEmail: ownerEmail || "" });
-  const response = await fetch(`/api/gmail/oauth?${query.toString()}`, {
+  const response = await fetch(apiUrl(`/api/gmail/oauth?${query.toString()}`), {
     method: "DELETE",
   });
   const payload = await response.json().catch(() => ({}));

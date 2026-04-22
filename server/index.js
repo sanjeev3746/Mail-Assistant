@@ -15,10 +15,14 @@ const DATA_DIR = path.join(__dirname, "data");
 const STORAGE_FILE = path.join(DATA_DIR, "scheduled-jobs.json");
 const HISTORY_FILE = path.join(DATA_DIR, "delivery-history.json");
 const OAUTH_TOKENS_FILE = path.join(DATA_DIR, "gmail-oauth-tokens.json");
-const PORT = Number(process.env.SCHEDULER_PORT || 3001);
+const PORT = Number(process.env.PORT || process.env.SCHEDULER_PORT || 3001);
 const MAX_TIMEOUT_MS = 2147483000;
 const MAX_HISTORY_ITEMS = 500;
 const FRONTEND_BASE_URL = process.env.FRONTEND_BASE_URL || "http://localhost:3000";
+const ALLOWED_CORS_ORIGINS = String(process.env.FRONTEND_BASE_URLS || FRONTEND_BASE_URL)
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
 const GOOGLE_OAUTH_REDIRECT_URI =
   process.env.GOOGLE_OAUTH_REDIRECT_URI || `http://localhost:${PORT}/api/gmail/oauth/callback`;
 const GOOGLE_OAUTH_SCOPES = [
@@ -30,7 +34,18 @@ const GOOGLE_OAUTH_SCOPES = [
 ];
 
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin(origin, callback) {
+      if (!origin || ALLOWED_CORS_ORIGINS.includes(origin)) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error("Not allowed by CORS"));
+    },
+  })
+);
 app.use(express.json({ limit: "1mb" }));
 
 const jobs = new Map();
