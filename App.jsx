@@ -2544,12 +2544,6 @@ function LoginPage({ onLogin }) {
         return;
       }
 
-      if (isGoogleOnlyAccount(existingUser)) {
-        setLocalError("This account uses Google Sign-In. Continue with Google below.");
-        setGoogleOnlyEmail(normalizedEmail);
-        return;
-      }
-
       if (!trimmedPassword) {
         setLocalError("Please enter a new password.");
         return;
@@ -2564,6 +2558,8 @@ function LoginPage({ onLogin }) {
         user.email === normalizedEmail
           ? {
               ...user,
+              authProvider:
+                user.authProvider === "google" ? "local+google" : user.authProvider,
               password: trimmedPassword,
               updatedAt: new Date().toISOString(),
             }
@@ -2573,7 +2569,7 @@ function LoginPage({ onLogin }) {
 
       setPassword("");
       setConfirmPassword("");
-      setSuccessMessage("Password reset successful. Please sign in.");
+      setSuccessMessage("Password saved. You can now sign in with email and password.");
       setMode("login");
       return;
     }
