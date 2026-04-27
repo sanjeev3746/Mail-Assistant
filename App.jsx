@@ -76,7 +76,7 @@ function saveAnalysisCache(cache) {
 }
 
 function normalizeEmail(email) {
-  return email.trim().toLowerCase();
+  return String(email ?? "").trim().toLowerCase();
 }
 
 function loadAuthUsers() {
