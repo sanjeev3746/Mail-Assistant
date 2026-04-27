@@ -934,6 +934,86 @@ const S = {
     color: C.textMuted,
     marginTop: 8,
   },
+  chartSection: {
+    marginBottom: 28,
+    display: "grid",
+    gap: 18,
+  },
+  chartGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+    gap: 18,
+  },
+  chartCard: {
+    background: "linear-gradient(180deg, #1b2f46 0%, #172a40 100%)",
+    border: "1px solid #35516d",
+    borderRadius: 12,
+    padding: 18,
+    boxShadow: "0 10px 20px rgba(2,9,21,0.34)",
+  },
+  chartCardWide: {
+    background: "linear-gradient(180deg, #1b2f46 0%, #172a40 100%)",
+    border: "1px solid #35516d",
+    borderRadius: 12,
+    padding: 18,
+    boxShadow: "0 10px 20px rgba(2,9,21,0.34)",
+  },
+  chartTitle: {
+    fontSize: 14,
+    fontWeight: 700,
+    color: C.textPrimary,
+    marginBottom: 6,
+  },
+  chartSub: {
+    fontSize: 12,
+    color: C.textMuted,
+    marginBottom: 14,
+    lineHeight: 1.5,
+  },
+  barList: {
+    display: "flex",
+    flexDirection: "column",
+    gap: 10,
+  },
+  barRow: {
+    display: "grid",
+    gridTemplateColumns: "94px minmax(0, 1fr) 40px",
+    gap: 10,
+    alignItems: "center",
+  },
+  barLabel: {
+    fontSize: 12,
+    color: C.textSecondary,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+  },
+  barTrack: {
+    height: 10,
+    borderRadius: 999,
+    background: "rgba(255,255,255,0.08)",
+    overflow: "hidden",
+    border: "1px solid rgba(109,137,166,0.18)",
+  },
+  barFill: {
+    height: "100%",
+    borderRadius: 999,
+    background: "linear-gradient(90deg, #22d3ee 0%, #14b8a6 100%)",
+  },
+  barValue: {
+    textAlign: "right",
+    fontSize: 12,
+    color: C.textPrimary,
+    fontWeight: 700,
+  },
+  chartEmpty: {
+    fontSize: 13,
+    color: C.textMuted,
+    border: `1px dashed ${C.border}`,
+    borderRadius: 10,
+    padding: "14px 16px",
+    background: "rgba(8,18,29,0.22)",
+  },
   // Email card
   emailCard: {
     background: "linear-gradient(180deg, #1b2f46 0%, #172a40 100%)",
@@ -1255,6 +1335,143 @@ function churnStyle(c) {
 }
 function categoryStyle() {
   return { bg: C.indigoLight, color: "#3730a3", border: "#c7d2fe" };
+}
+
+function getCountByKey(results, key, value) {
+  return results.filter((item) => String(item?.[key] || "") === value).length;
+}
+
+function buildChartRows(results, key, labels, fallbackLabel = "Other") {
+  const rows = labels.map(({ label, value, color }) => ({
+    label,
+    value: getCountByKey(results, key, value),
+    color,
+  }));
+
+  const knownValues = new Set(labels.map((entry) => entry.value));
+  const fallbackCount = results.filter((item) => !knownValues.has(String(item?.[key] || ""))).length;
+
+  if (fallbackCount > 0) {
+    rows.push({ label: fallbackLabel, value: fallbackCount, color: "#64748b" });
+  }
+
+  return rows.filter((row) => row.value > 0);
+}
+
+function BarChart({ title, subtitle, rows }) {
+  const max = Math.max(...rows.map((row) => row.value), 1);
+
+  return (
+    <div style={S.chartCard}>
+      <div style={S.chartTitle}>{title}</div>
+      <div style={S.chartSub}>{subtitle}</div>
+      {rows.length ? (
+        <div style={S.barList}>
+          {rows.map((row) => {
+            const width = Math.max((row.value / max) * 100, row.value > 0 ? 8 : 0);
+            return (
+              <div key={row.label} style={S.barRow}>
+                <div style={S.barLabel} title={row.label}>
+                  {row.label}
+                </div>
+                <div style={S.barTrack}>
+                  <div
+                    style={{
+                      ...S.barFill,
+                      width: `${width}%`,
+                      background: row.color || S.barFill.background,
+                    }}
+                  />
+                </div>
+                <div style={S.barValue}>{row.value}</div>
+              </div>
+            );
+          })}
+        </div>
+      ) : (
+        <div style={S.chartEmpty}>No data yet. Run an analysis to generate charts.</div>
+      )}
+    </div>
+  );
+}
+
+function DashboardCharts({ results }) {
+  const sentimentRows = buildChartRows(results, "sentiment", [
+    { label: "Positive", value: "Positive", color: "#22c55e" },
+    { label: "Neutral", value: "Neutral", color: "#eab308" },
+    { label: "Negative", value: "Negative", color: "#f97316" },
+    { label: "Furious", value: "Furious", color: "#ef4444" },
+  ]);
+
+  const urgencyRows = buildChartRows(results, "urgency", [
+    { label: "Low", value: "Low", color: "#22c55e" },
+    { label: "Medium", value: "Medium", color: "#eab308" },
+    { label: "High", value: "High", color: "#f97316" },
+    { label: "Critical", value: "Critical", color: "#ef4444" },
+  ]);
+
+  const categoryCounts = results.reduce((acc, item) => {
+    const category = String(item?.category || "Other").trim() || "Other";
+    acc.set(category, (acc.get(category) || 0) + 1);
+    return acc;
+  }, new Map());
+
+  const categoryRows = Array.from(categoryCounts.entries())
+    .map(([label, value], index) => ({
+      label,
+      value,
+      color: ["#22d3ee", "#14b8a6", "#818cf8", "#f97316", "#ef4444"][index % 5],
+    }))
+    .sort((a, b) => b.value - a.value)
+    .slice(0, 5);
+
+  return (
+    <div style={S.chartSection}>
+      <div style={S.chartGrid}>
+        <BarChart
+          title="Sentiment Mix"
+          subtitle="How customer tone is distributed across the analyzed emails."
+          rows={sentimentRows}
+        />
+        <BarChart
+          title="Urgency Breakdown"
+          subtitle="Tickets grouped by urgency level from low to critical."
+          rows={urgencyRows}
+        />
+      </div>
+      <div style={S.chartCardWide}>
+        <div style={S.chartTitle}>Top Categories</div>
+        <div style={S.chartSub}>The most common issue types in the current analysis batch.</div>
+        {categoryRows.length ? (
+          <div style={S.barList}>
+            {categoryRows.map((row) => {
+              const max = Math.max(...categoryRows.map((item) => item.value), 1);
+              const width = Math.max((row.value / max) * 100, row.value > 0 ? 8 : 0);
+              return (
+                <div key={row.label} style={S.barRow}>
+                  <div style={S.barLabel} title={row.label}>
+                    {row.label}
+                  </div>
+                  <div style={S.barTrack}>
+                    <div
+                      style={{
+                        ...S.barFill,
+                        width: `${width}%`,
+                        background: row.color,
+                      }}
+                    />
+                  </div>
+                  <div style={S.barValue}>{row.value}</div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div style={S.chartEmpty}>No category data yet. Analyze emails to see the chart.</div>
+        )}
+      </div>
+    </div>
+  );
 }
 
 function Badge({ label, emoji, styleObj, title }) {
@@ -2235,25 +2452,28 @@ function StatsStrip({ results }) {
   ];
 
   return (
-    <div style={S.statsRow} className="stats-row">
-      {stats.map((s) => (
-        <div key={s.label} style={S.statCard}>
-          <div style={S.statLabel}>
-            {s.emoji} {s.label}
+    <>
+      <div style={S.statsRow} className="stats-row">
+        {stats.map((s) => (
+          <div key={s.label} style={S.statCard}>
+            <div style={S.statLabel}>
+              {s.emoji} {s.label}
+            </div>
+            <div
+              style={{
+                ...S.statValue,
+                color: s.color,
+                fontSize: s.isText ? 22 : 30,
+              }}
+            >
+              {s.value}
+            </div>
+            <div style={S.statSub}>{s.sub}</div>
           </div>
-          <div
-            style={{
-              ...S.statValue,
-              color: s.color,
-              fontSize: s.isText ? 22 : 30,
-            }}
-          >
-            {s.value}
-          </div>
-          <div style={S.statSub}>{s.sub}</div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+      <DashboardCharts results={results} />
+    </>
   );
 }
 
@@ -2272,6 +2492,7 @@ function LoginPage({ onLogin }) {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [localError, setLocalError] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [googleOnlyEmail, setGoogleOnlyEmail] = useState("");
   const [mode, setMode] = useState("login");
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -2280,6 +2501,7 @@ function LoginPage({ onLogin }) {
     setMode(nextMode);
     setLocalError("");
     setSuccessMessage("");
+    setGoogleOnlyEmail("");
   };
 
   const isGoogleOnlyAccount = (user) =>
@@ -2291,6 +2513,7 @@ function LoginPage({ onLogin }) {
 
     setLocalError("");
     setSuccessMessage("");
+    setGoogleOnlyEmail("");
 
     if (!normalizedEmail) {
       setLocalError("Please enter your email address.");
@@ -2322,7 +2545,8 @@ function LoginPage({ onLogin }) {
       }
 
       if (isGoogleOnlyAccount(existingUser)) {
-        setLocalError("This account uses Google Sign-In. Use the Google button.");
+        setLocalError("This account uses Google Sign-In. Continue with Google below.");
+        setGoogleOnlyEmail(normalizedEmail);
         return;
       }
 
@@ -2385,7 +2609,8 @@ function LoginPage({ onLogin }) {
     }
 
     if (isGoogleOnlyAccount(existingUser)) {
-      setLocalError("This account uses Google Sign-In. Use the Google button.");
+      setLocalError("This account uses Google Sign-In. Continue with Google below.");
+      setGoogleOnlyEmail(normalizedEmail);
       return;
     }
 
@@ -2398,9 +2623,10 @@ function LoginPage({ onLogin }) {
     onLogin(normalizedEmail);
   };
 
-  const signInWithGoogle = async () => {
+  const signInWithGoogle = async (preferredEmail = "") => {
     setLocalError("");
     setSuccessMessage("");
+    setGoogleOnlyEmail("");
 
     setIsGoogleLoading(true);
     try {
@@ -2408,7 +2634,12 @@ function LoginPage({ onLogin }) {
       await setPersistence(auth, browserLocalPersistence);
 
       const provider = new GoogleAuthProvider();
-      provider.setCustomParameters({ prompt: "select_account" });
+      const preferredNormalized = normalizeEmail(preferredEmail);
+      provider.setCustomParameters(
+        preferredNormalized && isValidEmail(preferredNormalized)
+          ? { prompt: "select_account", login_hint: preferredNormalized }
+          : { prompt: "select_account" }
+      );
 
       const result = await signInWithPopup(auth, provider);
       const normalizedEmail = normalizeEmail(result.user?.email || "");
@@ -2493,7 +2724,12 @@ function LoginPage({ onLogin }) {
             type="email"
             placeholder="Enter your email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              if (googleOnlyEmail) {
+                setGoogleOnlyEmail("");
+              }
+            }}
             autoFocus
           />
         </div>
@@ -2546,6 +2782,23 @@ function LoginPage({ onLogin }) {
           <div style={{ color: "#b91c1c", marginTop: 10, fontSize: 13 }}>
             {localError}
           </div>
+        )}
+        {mode === "login" && googleOnlyEmail && (
+          <button
+            type="button"
+            style={{
+              ...S.loginGoogleBtn,
+              marginTop: 10,
+              background: "#f8fafc",
+              borderColor: "#cbd5e1",
+              color: "#0f172a",
+            }}
+            onClick={() => signInWithGoogle(googleOnlyEmail)}
+            disabled={isGoogleLoading}
+          >
+            <GoogleLogoIcon />
+            {isGoogleLoading ? "Connecting..." : `Continue with Google (${googleOnlyEmail})`}
+          </button>
         )}
         {successMessage && (
           <div style={S.successText}>{successMessage}</div>
